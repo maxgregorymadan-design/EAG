@@ -3,815 +3,395 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game & Media Hub</title>
-
+<title>EAG Secure Launcher</title>
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%}
+body{
+    min-height:100vh;display:flex;justify-content:center;align-items:center;padding:24px;
+    color:#eef2ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%,rgba(99,102,241,.18),transparent 32%),
+      radial-gradient(circle at 85% 90%,rgba(139,92,246,.15),transparent 32%),
+      #070912;overflow:hidden
 }
-
-html {
-  scroll-behavior: smooth;
+body:before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;
+    background-image:linear-gradient(rgba(148,163,184,.035) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(148,163,184,.035) 1px,transparent 1px);
+    background-size:48px 48px
 }
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #080b12;
-  color: #f5f7ff;
+.launcher{
+    position:relative;z-index:2;width:min(470px,100%);padding:48px 40px;
+    text-align:center;background:rgba(13,17,30,.88);
+    border:1px solid rgba(148,163,184,.16);border-radius:24px;
+    box-shadow:0 28px 90px rgba(0,0,0,.45),0 0 55px rgba(99,102,241,.08),inset 0 1px rgba(255,255,255,.06);
+    backdrop-filter:blur(24px)
 }
-
-header {
-  padding: 42px 20px;
-  text-align: center;
-  background:
-    radial-gradient(circle at top, #30205d, transparent 55%),
-    linear-gradient(135deg, #11162a, #090b12);
-  border-bottom: 1px solid #292f43;
+.launcher:before{
+    content:"";position:absolute;top:0;left:15%;right:15%;height:2px;
+    background:linear-gradient(90deg,transparent,#818cf8,#c4b5fd,transparent);
+    box-shadow:0 0 22px rgba(129,140,248,.7)
 }
-
-header h1 {
-  margin: 0;
-  font-size: clamp(30px, 6vw, 52px);
+.logo{font-size:56px;filter:drop-shadow(0 8px 20px rgba(99,102,241,.45))}
+h1{
+    margin:12px 0 6px;font-size:39px;letter-spacing:8px;font-weight:800;
+    background:linear-gradient(90deg,#a5b4fc,#f5f3ff,#c4b5fd);
+    -webkit-background-clip:text;color:transparent
 }
-
-header p {
-  color: #aeb7cc;
-  margin: 10px 0 0;
+.subtitle{color:#8f9bb3;font-size:11px;font-weight:600;letter-spacing:3px;margin-bottom:32px}
+.launch-button{
+    width:100%;padding:17px;border:1px solid rgba(255,255,255,.08);border-radius:12px;
+    color:white;font-size:14px;font-weight:750;letter-spacing:1.2px;cursor:pointer;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    box-shadow:0 12px 30px rgba(79,70,229,.22);transition:.2s
 }
-
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 9px;
-  padding: 14px;
-  background: rgba(10, 13, 22, .94);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #272d40;
+.launch-button:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(99,102,241,.34);filter:brightness(1.08)}
+.launch-button:active{transform:translateY(0)}
+.join{margin-top:30px;padding-top:23px;border-top:1px solid rgba(148,163,184,.1)}
+.join-title{color:#a5b4fc;font-size:10px;font-weight:750;letter-spacing:3px}
+.email{display:inline-block;margin-top:9px;color:#8490a8;text-decoration:none;font-size:12px;transition:.2s}
+.email:hover{color:#e0e7ff}
+@media(max-width:520px){.launcher{padding:38px 25px}h1{font-size:32px;letter-spacing:6px}}
+</style>
+</head>
+<body>
+<div class="launcher">
+    <div class="logo">🔐</div>
+    <h1>EAG</h1>
+    <div class="subtitle">SECURE SYMBOL CIPHER</div>
+    <button class="launch-button" onclick="launchCipher()">⚡ LAUNCH EAG CIPHER</button>
+    <div class="join">
+        <div class="join-title">JOIN EAG</div>
+        <a class="email" href="mailto:cerealwithchips@gmail.com">cerealwithchips@gmail.com</a>
+    </div>
+</div>
+<script>
+function launchCipher(){
+    const win=window.open("about:blank","_blank","width=900,height=950,resizable=yes");
+    if(!win){
+        alert("Please allow pop-ups for this launcher.");
+        return;
+    }
+    const html=`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EAG Cipher</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+    min-height:100vh;padding:30px;display:flex;justify-content:center;align-items:center;
+    color:#eef2ff;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+      radial-gradient(circle at 12% 8%,rgba(99,102,241,.16),transparent 30%),
+      radial-gradient(circle at 90% 92%,rgba(124,58,237,.14),transparent 32%),
+      #070912
 }
-
-button,
-.link-button {
-  border: 0;
-  border-radius: 10px;
-  padding: 11px 15px;
-  background: #20283d;
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-  transition: .15s;
+body:before{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.4;
+    background-image:linear-gradient(rgba(148,163,184,.035) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(148,163,184,.035) 1px,transparent 1px);
+    background-size:48px 48px
 }
-
-button:hover,
-.link-button:hover {
-  background: #34415f;
-  transform: translateY(-1px);
+.container{
+    position:relative;width:100%;max-width:760px;padding:42px;
+    background:rgba(13,17,30,.9);border:1px solid rgba(148,163,184,.15);
+    border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.48),0 0 55px rgba(99,102,241,.07),inset 0 1px rgba(255,255,255,.06);
+    backdrop-filter:blur(24px)
 }
-
-main {
-  width: min(1250px, 94%);
-  margin: auto;
-  padding: 30px 0 60px;
+.container:before{
+    content:"";position:absolute;left:15%;right:15%;top:0;height:2px;
+    background:linear-gradient(90deg,transparent,#818cf8,#c4b5fd,transparent);
+    box-shadow:0 0 22px rgba(129,140,248,.65)
 }
-
-section {
-  margin-bottom: 48px;
+.header{text-align:center;margin-bottom:30px}
+.logo{font-size:44px;filter:drop-shadow(0 7px 18px rgba(99,102,241,.45))}
+h1{
+    margin:10px 0 6px;font-size:36px;letter-spacing:6px;font-weight:800;
+    background:linear-gradient(90deg,#a5b4fc,#f5f3ff,#c4b5fd);
+    -webkit-background-clip:text;color:transparent
 }
-
-section h2 {
-  font-size: 28px;
-  margin-bottom: 18px;
+.subtitle{color:#8f9bb3;font-size:10px;font-weight:650;letter-spacing:2.5px}
+.status{
+    display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:7px 12px;
+    border-radius:999px;color:#aab4c9;background:rgba(99,102,241,.07);
+    border:1px solid rgba(129,140,248,.14);font-size:9px;font-weight:650;letter-spacing:1px
 }
-
-.notice {
-  padding: 16px;
-  margin-bottom: 28px;
-  border: 1px solid #303950;
-  border-radius: 14px;
-  background: #111725;
-  color: #b8c1d5;
+.status-dot{width:7px;height:7px;border-radius:50%;background:#818cf8;box-shadow:0 0 12px #818cf8}
+label{
+    display:block;margin:20px 0 9px;color:#a5b4fc;font-size:10px;font-weight:750;
+    letter-spacing:2px;text-transform:uppercase
 }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-  gap: 14px;
+textarea,input{
+    width:100%;outline:none;border-radius:12px;border:1px solid rgba(148,163,184,.14);
+    background:rgba(4,7,14,.72);color:#e5e7eb;font-family:"SFMono-Regular",Consolas,monospace;
+    font-size:13px;transition:.2s
 }
-
-.card {
-  padding: 17px;
-  background: #111622;
-  border: 1px solid #262e43;
-  border-radius: 15px;
-  transition: .15s;
+textarea{min-height:145px;padding:16px;resize:vertical;line-height:1.55}
+input{padding:13px}
+textarea:focus,input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.09)}
+textarea::placeholder,input::placeholder{color:#566176}
+.buttons{display:flex;gap:10px;margin-top:12px}
+button{
+    flex:1;padding:13px;border:1px solid rgba(255,255,255,.07);border-radius:10px;cursor:pointer;
+    color:white;font-weight:700;font-size:11px;letter-spacing:.5px;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);box-shadow:0 9px 22px rgba(79,70,229,.16);
+    transition:.2s
 }
-
-.card:hover {
-  border-color: #414d6b;
-  transform: translateY(-2px);
+button:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 13px 28px rgba(99,102,241,.28)}
+button:active{transform:translateY(0)}
+.secondary{background:rgba(255,255,255,.035);border:1px solid rgba(148,163,184,.13);color:#aeb8ca;box-shadow:none}
+.secondary:hover{background:rgba(99,102,241,.09);color:#e5e7eb}
+.message{min-height:18px;margin-top:14px;text-align:center;color:#9aa6ba;font-size:11px}
+.footer{margin-top:26px;padding-top:21px;border-top:1px solid rgba(148,163,184,.09);text-align:center}
+.footer-title{color:#a5b4fc;font-size:9px;font-weight:750;letter-spacing:3px}
+.email{display:inline-block;margin-top:8px;color:#727e94;text-decoration:none;font-size:11px}
+.email:hover{color:#dbe4ff}
+.note{
+    margin-top:15px;padding:11px;border-radius:10px;background:rgba(99,102,241,.045);
+    border:1px solid rgba(129,140,248,.06);color:#69758b;font-size:10px;line-height:1.5;text-align:center
 }
-
-.card h3 {
-  margin: 0 0 9px;
-  font-size: 17px;
-}
-
-.card p {
-  color: #9ea8bd;
-  font-size: 13px;
-  line-height: 1.5;
-  min-height: 38px;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.search-box {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1px solid #30384f;
-  background: #0e1320;
-  color: white;
-  outline: none;
-}
-
-.search-box:focus {
-  border-color: #6879a5;
-}
-
-.empty {
-  display: none;
-  color: #929bb0;
-  padding: 15px 0;
-}
-
-footer {
-  text-align: center;
-  padding: 35px 20px;
-  color: #727c91;
-  border-top: 1px solid #202638;
-}
-
-@media(max-width:600px) {
-  nav {
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
-
-  main {
-    width: 92%;
-  }
+@media(max-width:600px){
+    body{padding:15px}.container{padding:25px}.buttons{flex-direction:column}
+    h1{font-size:28px;letter-spacing:4px}
 }
 </style>
 </head>
-
 <body>
-
-<header>
-  <h1>🎮 Game & Media Hub</h1>
-  <p>Games • Media • Tools • Community</p>
-</header>
-
-<nav>
-  <button onclick="go('games')">🎮 Games</button>
-  <button onclick="go('movies')">🎬 Movies</button>
-  <button onclick="go('tv')">📺 TV</button>
-  <button onclick="go('anime')">🍿 Anime</button>
-  <button onclick="go('tools')">🧰 Tools</button>
-  <button onclick="go('submit')">📨 Submit</button>
-</nav>
-
-<main>
-
-<div class="notice">
-  <strong>Welcome!</strong><br>
-  Use the sections above to browse the hub. External links open in a new tab.
-</div>
-
-<!-- =====================================================
-     GAMES
-===================================================== -->
-
-<section id="games">
-
-<h2>🎮 Games</h2>
-
-<div class="grid">
-
-<div class="card">
-  <h3>DELTARUNE</h3>
-  <p>Web version with chapters 1–5.</p>
-  <div class="actions">
-    <button onclick="openTab('https://byalvaro19.github.io/deltarune/')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Terraria</h3>
-  <p>Browser version.</p>
-  <div class="actions">
-    <button onclick="openTab('https://terraria.mercurywork.shop')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Hollow Knight</h3>
-  <p>WebGL version.</p>
-  <div class="actions">
-    <button onclick="openTab('https://cdn.jsdelivr.net/gh/aukaas/hollow-knight@latest/')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Celeste</h3>
-  <p>Browser port.</p>
-  <div class="actions">
-    <button onclick="openTab('https://cdn.jsdelivr.net/gh/web-ports/celeste@4f043a5ce121b74dc54ce56d74f213a2eeea6b4e/')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Undertale</h3>
-  <p>Browser version.</p>
-  <div class="actions">
-    <button onclick="openTab('https://cdn.jsdelivr.net/gh/arcade-v/gamemaker/undertale/')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>UGS Files</h3>
-  <p>Games collection launcher.</p>
-  <div class="actions">
-    <button onclick="openTab('https://cdn.jsdelivr.net/gh/bubbls/ugs-singlefile@main/')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>SerumOS</h3>
-  <p>External game/app interface.</p>
-  <div class="actions">
-    <button onclick="openTab('https://s3.amazonaws.com/lessoncove/index.html')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Minecraft</h3>
-  <p>Eagletcraft-based project.</p>
-  <div class="actions">
-    <button onclick="openTab('https://cdn.jsdelivr.net/gh/PlanetDogeCodes/EagletcraftX@main/')">
-      Open
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Minesweeper</h3>
-  <p>Classic browser Minesweeper.</p>
-  <div class="actions">
-    <button onclick="alert('Insert your supplied Minesweeper HTML here.')">
-      Launch
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Pokémon 3DS Template</h3>
-  <p>EmulatorJS template. Requires your own hosted game files.</p>
-  <div class="actions">
-    <button onclick="alert('This is a template and is not configured with a game file.')">
-      Info
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>EAG Secure Launcher</h3>
-  <p>EAG Cipher launcher.</p>
-  <div class="actions">
-    <button onclick="alert('Insert your supplied EAG launcher HTML here.')">
-      Launch
-    </button>
-  </div>
-</div>
-
-</div>
-</section>
-
-
-<!-- =====================================================
-     MOVIES
-===================================================== -->
-
-<section id="movies">
-
-<h2>🎬 Movies</h2>
-
-<input
-  class="search-box"
-  id="movieSearch"
-  type="search"
-  placeholder="Search movies..."
-  oninput="filterCards('movieGrid','movieSearch')"
->
-
-<div class="grid" id="movieGrid">
-
-<!--
-  Add your own authorized media here.
-
-  Example:
-
-  <div class="card">
-    <h3>My Movie</h3>
-    <p>My media</p>
-    <div class="actions">
-      <button onclick="openTab('YOUR_LINK_HERE')">
-        Open
-      </button>
+<div class="container">
+    <div class="header">
+        <div class="logo">🔐</div>
+        <h1>EAG CIPHER</h1>
+        <div class="subtitle">AES-256-GCM ENCRYPTION TERMINAL</div>
+        <div class="status"><span class="status-dot"></span><span id="statusText">LOCAL + CLOUD READY</span></div>
     </div>
-  </div>
--->
-
-<div class="card">
-  <h3>Movie Mega Archive</h3>
-  <p>Google Drive folder.</p>
-  <div class="actions">
-    <button onclick="openTab('https://drive.google.com/drive/folders/155pMa1ZgYzy0FRT6NfGkfdWkwxfOud3p')">
-      Open
-    </button>
-  </div>
+    <label>Input</label>
+    <textarea id="input" placeholder="Enter text to encrypt or EAG data to decrypt..."></textarea>
+    <div class="buttons">
+        <button onclick="encrypt()">🔒 ENCRYPT & SAVE</button>
+        <button onclick="decrypt()">🔓 DECRYPT</button>
+    </div>
+    <label>Output</label>
+    <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
+    <div class="buttons">
+        <button class="secondary" onclick="loadLatest()">☁ LOAD LATEST</button>
+        <button class="secondary" onclick="copyText()">⧉ COPY</button>
+        <button class="secondary" onclick="swap()">↕ USE OUTPUT</button>
+        <button class="secondary" onclick="clearAll()">✕ CLEAR</button>
+    </div>
+    <div id="message" class="message"></div>
+    <div class="note">
+        Messages are encrypted in the browser.
+    </div>
+    <div class="footer">
+        <div class="footer-title">EAG SECURE SYSTEM</div>
+        <a class="email" href="mailto:cerealwithchips@gmail.com">JOIN EAG • cerealwithchips@gmail.com</a>
+    </div>
 </div>
-
-</div>
-
-<p class="empty" id="movieEmpty">
-  No movies found.
-</p>
-
-</section>
-
-
-<!-- =====================================================
-     TV
-===================================================== -->
-
-<section id="tv">
-
-<h2>📺 TV Shows</h2>
-
-<input
-  class="search-box"
-  id="tvSearch"
-  type="search"
-  placeholder="Search TV shows..."
-  oninput="filterCards('tvGrid','tvSearch')"
->
-
-<div class="grid" id="tvGrid">
-
-<div class="card">
-  <h3>The Simpsons</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>SpongeBob</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Family Guy</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>The Cleveland Show</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Smiling Friends</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Gravity Falls</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>South Park</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Regular Show</h3>
-  <p>TV series + movie.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Breaking Bad</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Garfield & Friends</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Adventure Time</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Rick and Morty</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>The Amazing World of Gumball</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Scooby-Doo! Where Are You?</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Sonic Boom</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Sonic Prime</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Young Sheldon</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Beast Games</h3>
-  <p>TV series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-</div>
-
-<p class="empty" id="tvEmpty">
-  No shows found.
-</p>
-
-</section>
-
-
-<!-- =====================================================
-     ANIME
-===================================================== -->
-
-<section id="anime">
-
-<h2>🍿 Anime</h2>
-
-<input
-  class="search-box"
-  id="animeSearch"
-  type="search"
-  placeholder="Search anime..."
-  oninput="filterCards('animeGrid','animeSearch')"
->
-
-<div class="grid" id="animeGrid">
-
-<div class="card">
-  <h3>Dragon Ball</h3>
-  <p>Original series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Pokémon</h3>
-  <p>Series.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>One Piece</h3>
-  <p>Episodes 1–5.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Invincible</h3>
-  <p>Seasons 1–3.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Invincible Season 4</h3>
-  <p>Episodes 1–8.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Attack on Titan</h3>
-  <p>Seasons 1–4.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Jujutsu Kaisen 0</h3>
-  <p>Movie.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Demon Slayer</h3>
-  <p>Series and additional episodes.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Spy × Family</h3>
-  <p>Episodes 11–24.</p>
-  <div class="actions">
-    <button onclick="openSubmit()">Request / Add Link</button>
-  </div>
-</div>
-
-</div>
-
-<p class="empty" id="animeEmpty">
-  No anime found.
-</p>
-
-</section>
-
-
-<!-- =====================================================
-     TOOLS
-===================================================== -->
-
-<section id="tools">
-
-<h2>🧰 Tools & Links</h2>
-
-<div class="grid">
-
-<div class="card">
-  <h3>OSINT Tools</h3>
-  <p>OSINT Newsletter tools collection.</p>
-  <div class="actions">
-    <button onclick="openTab('https://tools.osintnewsletter.com/')">
-      Open
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>SerumOS</h3>
-  <p>External interface.</p>
-  <div class="actions">
-    <button onclick="openTab('https://s3.amazonaws.com/lessoncove/index.html')">
-      Open
-    </button>
-  </div>
-</div>
-
-<div class="card">
-  <h3>Movie Mega Archive</h3>
-  <p>Google Drive archive.</p>
-  <div class="actions">
-    <button onclick="openTab('https://drive.google.com/drive/folders/155pMa1ZgYzy0FRT6NfGkfdWkwxfOud3p')">
-      Open
-    </button>
-  </div>
-</div>
-
-</div>
-</section>
-
-
-<!-- =====================================================
-     SUBMISSION FORMS
-===================================================== -->
-
-<section id="submit">
-
-<h2>📨 Submit / Requirements</h2>
-
-<div class="grid">
-
-<div class="card">
-  <h3>➕ Suggest Something</h3>
-
-  <p>
-    Submit a game, movie, show, or other item
-    you would like added to the website.
-  </p>
-
-  <div class="actions">
-    <button onclick="openTab('https://forms.gle/6rEBdXum7jNGbvHBA')">
-      Open Submission Form
-    </button>
-  </div>
-</div>
-
-
-<div class="card">
-  <h3>📋 Things They Have to Add</h3>
-
-  <p>
-    View the information and requirements
-    needed for submissions.
-  </p>
-
-  <div class="actions">
-    <button onclick="openTab('https://docs.google.com/forms/d/e/1FAIpQLSdC7HglIwWmEaTommXqXWlXUB3V3xJXl5Un27bV95o27IOQJg/viewform?usp=header')">
-      Open Requirements
-    </button>
-  </div>
-</div>
-
-</div>
-</section>
-
-</main>
-
-
-<footer>
-  Game & Media Hub
-</footer>
-
-
 <script>
-
-function openTab(url) {
-
-  const newTab = window.open("about:blank", "_blank");
-
-  if (!newTab) {
-    alert("Please allow popups for this website.");
-    return;
-  }
-
-  newTab.location.href = url;
+const SUPABASE_URL="https://elioleewmeibmbcqphzy.supabase.co";
+const SUPABASE_KEY="sb_publishable_pdjfuWxZi8gEERJyLjkIlQ_37zmoGd7";
+const FIXED_KEY="EAG-Purple-Cipher-2026";
+const ITERATIONS=600000;
+const SALT_LENGTH=16;
+const IV_LENGTH=12;
+const supabaseClient=window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+function configured(){
+    return !SUPABASE_URL.includes("PASTE_")&&!SUPABASE_KEY.includes("PASTE_");
 }
-
-
-function go(id) {
-
-  const element = document.getElementById(id);
-
-  if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
+function showMessage(text,error=false){
+    const box=document.getElementById("message");
+    box.textContent=text;
+    box.style.color=error?"#ff8fa3":"#b99acb";
 }
-
-
-function openSubmit() {
-
-  openTab("https://forms.gle/6rEBdXum7jNGbvHBA");
-
+function bytesToBase64(bytes){
+    let binary="";
+    for(const byte of bytes) binary+=String.fromCharCode(byte);
+    return btoa(binary);
 }
-
-
-function filterCards(gridId, inputId) {
-
-  const grid = document.getElementById(gridId);
-  const input = document.getElementById(inputId);
-
-  const search = input.value.toLowerCase().trim();
-
-  const cards = grid.querySelectorAll(".card");
-
-  let visible = 0;
-
-  cards.forEach(card => {
-
-    const text = card.innerText.toLowerCase();
-
-    if (text.includes(search)) {
-      card.style.display = "";
-      visible++;
-    } else {
-      card.style.display = "none";
+function base64ToBytes(base64){
+    const binary=atob(base64);
+    const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++) bytes[i]=binary.charCodeAt(i);
+    return bytes;
+}
+async function deriveKey(password,salt){
+    const encoder=new TextEncoder();
+    const passwordKey=await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveKey"]
+    );
+    return crypto.subtle.deriveKey(
+        {
+            name:"PBKDF2",
+            salt,
+            iterations:ITERATIONS,
+            hash:"SHA-256"
+        },
+        passwordKey,
+        {
+            name:"AES-GCM",
+            length:256
+        },
+        false,
+        ["encrypt","decrypt"]
+    );
+}
+async function encrypt(){
+    const input=document.getElementById("input").value;
+    if(!input){
+        showMessage("Enter something to encrypt.",true);
+        return;
     }
-
-  });
-
-  const emptyId =
-    gridId === "movieGrid"
-      ? "movieEmpty"
-      : gridId === "tvGrid"
-      ? "tvEmpty"
-      : "animeEmpty";
-
-  document.getElementById(emptyId).style.display =
-    visible === 0 ? "block" : "none";
+    if(!configured()){
+        showMessage("Add your Supabase URL and publishable key first.",true);
+        return;
+    }
+    try{
+        showMessage("Encrypting...");
+        const encoder=new TextEncoder();
+        const salt=crypto.getRandomValues(new Uint8Array(SALT_LENGTH));
+        const iv=crypto.getRandomValues(new Uint8Array(IV_LENGTH));
+        const key=await deriveKey(FIXED_KEY,salt);
+        const encrypted=await crypto.subtle.encrypt(
+            {name:"AES-GCM",iv,tagLength:128},
+            key,
+            encoder.encode(input)
+        );
+        const ciphertext=new Uint8Array(encrypted);
+        const header=encoder.encode("EAG1");
+        const result=new Uint8Array(
+            header.length+
+            salt.length+
+            iv.length+
+            ciphertext.length
+        );
+        let offset=0;
+        result.set(header,offset);
+        offset+=header.length;
+        result.set(salt,offset);
+        offset+=salt.length;
+        result.set(iv,offset);
+        offset+=iv.length;
+        result.set(ciphertext,offset);
+        const encryptedText="EAG1."+bytesToBase64(result);
+        document.getElementById("output").value=encryptedText;
+        const {data,error}=await supabaseClient
+            .from("eag_messages")
+            .insert({ciphertext:encryptedText})
+            .select("id")
+            .single();
+        if(error) throw error;
+        showMessage("Saved successfully.");
+    }catch(error){
+        console.error(error);
+        showMessage("Encryption worked, but cloud save failed: "+error.message,true);
+    }
 }
-
+async function decrypt(){
+    const input=document.getElementById("input").value.trim();
+    if(!input){
+        showMessage("Enter encrypted EAG data.",true);
+        return;
+    }
+    try{
+        showMessage("Decrypting...");
+        if(!input.startsWith("EAG1.")) throw new Error("Invalid EAG format");
+        const data=base64ToBytes(input.slice(5));
+        const header=new TextDecoder().decode(data.slice(0,4));
+        if(header!=="EAG1") throw new Error("Invalid header");
+        const salt=data.slice(4,4+SALT_LENGTH);
+        const iv=data.slice(4+SALT_LENGTH,4+SALT_LENGTH+IV_LENGTH);
+        const ciphertext=data.slice(4+SALT_LENGTH+IV_LENGTH);
+        const key=await deriveKey(FIXED_KEY,salt);
+        const decrypted=await crypto.subtle.decrypt(
+            {name:"AES-GCM",iv,tagLength:128},
+            key,
+            ciphertext
+        );
+        document.getElementById("output").value=
+            new TextDecoder().decode(decrypted);
+        showMessage("Decryption complete.");
+    }catch(error){
+        console.error(error);
+        document.getElementById("output").value="";
+        showMessage("Decryption failed — invalid data.",true);
+    }
+}
+async function loadLatest(){
+    if(!configured()){
+        showMessage("Add your Supabase URL and publishable key first.",true);
+        return;
+    }
+    try{
+        showMessage("Loading latest saved message...");
+        const {data,error}=await supabaseClient
+            .from("eag_messages")
+            .select("ciphertext")
+            .order("created_at",{ascending:false})
+            .limit(1)
+            .maybeSingle();
+        if(error) throw error;
+        if(!data){
+            showMessage("No saved messages found.",true);
+            return;
+        }
+        document.getElementById("input").value=data.ciphertext;
+        showMessage("Latest saved message loaded. Press DECRYPT to decrypt it.");
+    }catch(error){
+        console.error(error);
+        showMessage("Could not load the latest message.",true);
+    }
+}
+function swap(){
+    const input=document.getElementById("input");
+    const output=document.getElementById("output");
+    input.value=output.value;
+    output.value="";
+    showMessage("");
+}
+async function copyText(){
+    const output=document.getElementById("output");
+    if(!output.value){
+        showMessage("Nothing to copy.",true);
+        return;
+    }
+    try{
+        await navigator.clipboard.writeText(output.value);
+        showMessage("Copied to clipboard.");
+    }catch{
+        output.select();
+        document.execCommand("copy");
+        showMessage("Copied to clipboard.");
+    }
+}
+function clearAll(){
+    document.getElementById("input").value="";
+    document.getElementById("output").value="";
+    showMessage("Cleared.");
+}
+if(!configured()){
+    document.getElementById("statusText").textContent="SUPABASE SETUP REQUIRED";
+}
+<\/script>
+</body>
+</html>`;
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+}
 </script>
-
 </body>
 </html>
+
+
