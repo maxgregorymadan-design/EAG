@@ -447,14 +447,32 @@ function showScreen(id) {
 const no1 = document.getElementById("no1");
 
 const messages = [
-    "Nice try.",
-    "Wrong button 🤨",
-    "Why are you chasing it?",
-    "The YES button is right there.",
-    "Still trying?",
-    "You're very determined.",
-    "No button privileges revoked.",
-    "Just press yes ❤️"
+    "Nice try. 😏",
+    "That button seems to have other plans.",
+    "You missed it again 😂",
+    "Are you sure you meant to press that?",
+    "The YES button is getting lonely.",
+    "Nope. Try again.",
+    "Interesting strategy...",
+    "You're really committed to this, huh?",
+    "The button has entered evasive mode.",
+    "I admire the persistence.",
+    "That was definitely not YES.",
+    "The answer is still sitting over there 👀",
+    "Maybe try a different button?",
+    "The No button disagrees with your decision.",
+    "You almost had it!",
+    "Okay, this is getting impressive.",
+    "Still going?",
+    "The website is judging you 😂",
+    "That button is not cooperating.",
+    "Perhaps YES would be easier?",
+    "Nope. The chase continues.",
+    "You've unlocked another attempt.",
+    "The button remains undefeated.",
+    "Nice reflexes!",
+    "Okay, one more time...",
+    "You know where the YES button is ❤️"
 ];
 
 let tries = 0;
@@ -468,18 +486,15 @@ function moveFirstNo(e) {
     document.getElementById("message1")
         .innerText =
         messages[
-            Math.min(tries, messages.length - 1)
+            tries % messages.length
         ];
 
     tries++;
 
     const yes = document.getElementById("yes1");
 
-    const scale =
-        Math.min(1 + tries * .07, 1.5);
-
-    yes.style.transform =
-        "scale(" + scale + ")";
+    // Keep the YES button at its normal size.
+    yes.style.transform = "scale(1)";
 }
 
 no1.addEventListener("mouseenter", moveFirstNo);
