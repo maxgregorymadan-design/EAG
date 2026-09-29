@@ -1,87 +1,623 @@
-<h1>You have a message...</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Question ❤️</title>
 
-    <button class="introButton" onclick="openMessage()">
-        💌
-    </button>
+<style>
+* { box-sizing: border-box; }
 
-    <p>Click the letter</p>
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #ffcad4, #f4acb7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    animation: appear .4s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.card {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255,255,255,.95);
+    border-radius: 30px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+
+h1 {
+    color: #e63963;
+    font-size: 38px;
+    margin: 12px 0;
+}
+
+h2 {
+    color: #4d3b41;
+}
+
+p {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.heart {
+    font-size: 65px;
+    animation: beat 1.2s infinite;
+}
+
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    min-height: 70px;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.yes {
+    background: #ff477e;
+    color: white;
+    box-shadow: 0 8px 20px rgba(255,71,126,.3);
+}
+
+.yes:hover {
+    transform: scale(1.07);
+}
+
+.no {
+    background: #eee;
+    color: #444;
+}
+
+.introButton {
+    font-size: 80px;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    animation: float 2s infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.message {
+    color: #e63963;
+    font-weight: bold;
+    min-height: 25px;
+    margin-top: 15px;
+}
+
+.small {
+    font-size: 14px;
+    opacity: .65;
+}
+
+.progress {
+    margin: 20px auto 0;
+    width: 180px;
+    height: 7px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    background: #ff477e;
+    border-radius: 10px;
+}
+
+.floatingHeart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    top: -50px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div class="screen active" id="intro">
+    <div class="card">
+        <h1>You have a message...</h1>
+
+        <button class="introButton" onclick="showScreen('question')">
+            💌
+        </button>
+
+        <p>Click to open</p>
+    </div>
 </div>
-    <div class="heart">❤️</div>
 
-    <p>I have a very important question...</p>
 
-    <h1>Would you be my girlfriend?</h1>
+<!-- QUESTION -->
+<div class="screen" id="question">
+    <div class="card">
 
-    <div class="buttons">
+        <div class="heart">❤️</div>
 
-        <button
-            class="yes"
-            id="yes1"
-            onclick="goToConfirm()">
-            YES ❤️
-        </button>
+        <p>I have a pretty important question...</p>
 
-        <button
-            class="no"
-            id="no1">
-            No
-        </button>
+        <h1>Would you be my girlfriend?</h1>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                id="yes1"
+                onclick="showScreen('confirm1')">
+                Yes ❤️
+            </button>
+
+            <button
+                class="no"
+                id="no1">
+                No
+            </button>
+
+        </div>
+
+        <div class="message" id="message1"></div>
 
     </div>
-
-    <div id="message"></div>
-
 </div>
-    <div class="heart">🤨</div>
 
-    <h1>WAIT...</h1>
 
-    <h2>Are you REALLY sure?</h2>
+<!-- CONFIRMATION 1 -->
+<div class="screen" id="confirm1">
+    <div class="card">
 
-    <p>
-        Think carefully.
-        <br>
-        Try clicking No 😭
-    </p>
+        <div class="heart">🤨</div>
 
-    <div class="buttons">
+        <h1>Wait.</h1>
 
-        <button
-            class="yes"
-            onclick="finalYes()">
-            YES I'M SURE 💗
-        </button>
+        <h2>Are you sure?</h2>
 
-        <button
-            class="no"
-            id="no2">
-            No
-        </button>
+        <p>
+            Just checking.
+            <br>
+            This is a very serious website.
+        </p>
+
+        <div class="progress">
+            <div class="progressFill" style="width:25%"></div>
+        </div>
+
+        <p class="small">Confirmation 1 of 3</p>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="showScreen('confirm2')">
+                Yes, I'm sure
+            </button>
+
+            <button
+                class="no runaway">
+                No
+            </button>
+
+        </div>
 
     </div>
-
-    <div id="message2"></div>
-
 </div>
-    <div class="heart">💖</div>
 
-    <h1>YAYYYYY!!!</h1>
 
-    <h2>YOU SAID YES 😭❤️</h2>
+<!-- CONFIRMATION 2 -->
+<div class="screen" id="confirm2">
+    <div class="card">
 
-    <p>
-        You are officially my girlfriend now.
-    </p>
+        <div class="heart">📋</div>
 
-    <p>
-        No refunds.
-        <br>
-        No cancellations.
-        <br>
-        Terms and conditions apply.
-    </p>
+        <h1>Final background check</h1>
 
-    <h2>❤️ I LOVE YOU ❤️</h2>
+        <p>
+            Please confirm the following:
+        </p>
 
+        <h2>
+            You are voluntarily choosing YES.
+        </h2>
+
+        <p>
+            No bribery was involved.
+            <br>
+            Probably.
+        </p>
+
+        <div class="progress">
+            <div class="progressFill" style="width:55%"></div>
+        </div>
+
+        <p class="small">Confirmation 2 of 3</p>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="showScreen('confirm3')">
+                Confirm
+            </button>
+
+            <button
+                class="no runaway">
+                Go back
+            </button>
+
+        </div>
+
+    </div>
 </div>
+
+
+<!-- CONFIRMATION 3 -->
+<div class="screen" id="confirm3">
+    <div class="card">
+
+        <div class="heart">🔒</div>
+
+        <h1>Locking in answer...</h1>
+
+        <p>
+            Once you press the button below,
+            your answer becomes official.
+        </p>
+
+        <p>
+            Think carefully.
+        </p>
+
+        <div class="progress">
+            <div class="progressFill" style="width:80%"></div>
+        </div>
+
+        <p class="small">Confirmation 3 of 3</p>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="showScreen('lastChance')">
+                Lock in YES
+            </button>
+
+            <button
+                class="no runaway">
+                Wait...
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- LAST CHANCE -->
+<div class="screen" id="lastChance">
+    <div class="card">
+
+        <div class="heart">👀</div>
+
+        <h1>One last thing...</h1>
+
+        <p>
+            I know I said that was the last confirmation.
+        </p>
+
+        <p>
+            I lied.
+        </p>
+
+        <h2>
+            Final answer?
+        </h2>
+
+        <div class="progress">
+            <div class="progressFill" style="width:95%"></div>
+        </div>
+
+        <div class="buttons">
+
+            <button
+                class="yes"
+                onclick="finish()">
+                YES. FINAL ANSWER. ❤️
+            </button>
+
+            <button
+                class="no runaway">
+                No
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- FINAL -->
+<div class="screen" id="final">
+    <div class="card">
+
+        <div class="heart">💖</div>
+
+        <h1>It's official.</h1>
+
+        <h2>You said yes ❤️</h2>
+
+        <div class="progress">
+            <div class="progressFill" style="width:100%"></div>
+        </div>
+
+        <p>
+            Your application has been approved.
+        </p>
+
+        <p>
+            Girlfriend status:
+            <strong>ACTIVE</strong> ✅
+        </p>
+
+        <p class="small">
+            Terms and conditions were definitely not read.
+        </p>
+
+    </div>
+</div>
+
+
+<script>
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document.getElementById(id)
+        .classList.add("active");
+}
+
+
+/* FIRST NO BUTTON */
+
+const no1 = document.getElementById("no1");
+
+const messages = [
+    "Nice try.",
+    "Wrong button 🤨",
+    "Why are you chasing it?",
+    "The YES button is right there.",
+    "Still trying?",
+    "You're very determined.",
+    "No button privileges revoked.",
+    "Just press yes ❤️"
+];
+
+let tries = 0;
+
+function moveFirstNo(e) {
+
+    if (e) e.preventDefault();
+
+    moveButton(no1);
+
+    document.getElementById("message1")
+        .innerText =
+        messages[
+            Math.min(tries, messages.length - 1)
+        ];
+
+    tries++;
+
+    const yes = document.getElementById("yes1");
+
+    const scale =
+        Math.min(1 + tries * .07, 1.5);
+
+    yes.style.transform =
+        "scale(" + scale + ")";
+}
+
+no1.addEventListener("mouseenter", moveFirstNo);
+
+no1.addEventListener(
+    "touchstart",
+    moveFirstNo,
+    { passive:false }
+);
+
+no1.addEventListener("click", moveFirstNo);
+
+
+/* ALL OTHER RUNAWAY BUTTONS */
+
+document.querySelectorAll(".runaway")
+    .forEach(button => {
+
+        button.addEventListener(
+            "mouseenter",
+            function() {
+                moveButton(button);
+            }
+        );
+
+        button.addEventListener(
+            "touchstart",
+            function(e) {
+                e.preventDefault();
+                moveButton(button);
+            },
+            { passive:false }
+        );
+
+        button.addEventListener(
+            "click",
+            function(e) {
+                e.preventDefault();
+                moveButton(button);
+            }
+        );
+    });
+
+
+function moveButton(button) {
+
+    button.style.position = "fixed";
+    button.style.zIndex = "10000";
+
+    const padding = 20;
+
+    const maxX =
+        window.innerWidth -
+        button.offsetWidth -
+        padding;
+
+    const maxY =
+        window.innerHeight -
+        button.offsetHeight -
+        padding;
+
+    button.style.left =
+        Math.max(
+            padding,
+            Math.random() * maxX
+        ) + "px";
+
+    button.style.top =
+        Math.max(
+            padding,
+            Math.random() * maxY
+        ) + "px";
+}
+
+
+/* FINISH */
+
+function finish() {
+
+    document.querySelectorAll(".runaway")
+        .forEach(button => {
+            button.style.display = "none";
+        });
+
+    showScreen("final");
+
+    heartRain();
+}
+
+
+/* HEARTS */
+
+function heartRain() {
+
+    const hearts = [
+        "❤️",
+        "💖",
+        "💕",
+        "💗"
+    ];
+
+    for (let i = 0; i < 45; i++) {
+
+        setTimeout(function() {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "floatingHeart";
+
+            heart.innerText =
+                hearts[
+                    Math.floor(
+                        Math.random() * hearts.length
+                    )
+                ];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                (18 + Math.random() * 28) + "px";
+
+            heart.style.animationDuration =
+                (2 + Math.random() * 3) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(
+                () => heart.remove(),
+                5500
+            );
+
+        }, i * 70);
+    }
+}
+
+</script>
+
+</body>
+</html>
